@@ -19,7 +19,7 @@ if 'login_attempted' not in st.session_state:
 
 # Initialize Firebase
 if not firebase_admin._apps:
-    cred = credentials.Certificate('safespace-8cba7-4cd20a29de3f.json')
+    cred = credentials.Certificate('safespace.json')
     firebase_admin.initialize_app(cred)
 
 fake = Faker()
