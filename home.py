@@ -11,7 +11,7 @@ def app():
     st.title(f"Welcome to SafeSpace: {uid}")
 
     # Ensure image paths are correct
-    image_1 = Image.open("icons/logo.jpeg")
+    image_1 = Image.open("icons/logo")
     image_2 = Image.open("icons/chatbot.jpeg")
     image_3 = Image.open("icons/forums.jpeg")
     image_4 = Image.open("icons/resources 2.png")
