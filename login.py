@@ -21,17 +21,16 @@ if 'login_attempted' not in st.session_state:
     st.session_state['login_attempted'] = False
 
 # Initialize Firebase
-if not firebase_admin._apps:
+try:
     firebase_credentials = os.getenv('FIREBASE_CREDENTIALS')
     if firebase_credentials is None:
         st.error("Firebase credentials not set in environment variables.")
     else:
-        try:
-            firebase_credentials = base64.b64decode(firebase_credentials).decode('utf-8')
-            cred = credentials.Certificate(json.loads(firebase_credentials))
-            firebase_admin.initialize_app(cred)
-        except Exception as e:
-            st.error(f"Error initializing Firebase: {e}")
+        firebase_credentials = base64.b64decode(firebase_credentials).decode('utf-8')
+        cred = credentials.Certificate(json.loads(firebase_credentials))
+        firebase_admin.initialize_app(cred)
+except Exception as e:
+    st.error(f"Error initializing Firebase: {e}")
 
 fake = Faker()
 
@@ -51,6 +50,8 @@ def app():
         if login_button and not st.session_state['logged_in']:
             try:
                 user = auth.get_user_by_email(email)
+                # Authenticate the user using verify_password
+                auth.verify_password(email, password)
                 st.session_state['logged_in'] = True
                 st.session_state['user_email'] = email
                 st.session_state['current_page'] = "Home"
