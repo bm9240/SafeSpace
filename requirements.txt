@@ -13,7 +13,7 @@ colorama==0.4.6
 cryptography==43.0.0
 cs50==9.3.4
 distlib==0.3.8
-Django==5.0.6
+Django==5.0.8
 Faker==26.1.0
 filelock==3.14.0
 firebase-admin==6.5.0
